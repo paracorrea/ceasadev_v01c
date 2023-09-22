@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,13 +43,21 @@ public class SubgrupoController {
 			Subgrupo obj = subgrupoService.findById(id);
 			return ResponseEntity.ok().body(obj);	}
 		
-		@GetMapping("/subgrupos")
-		public ResponseEntity<List<Subgrupo>> findAll() {
+		@GetMapping("/subgrupos/all")
+		public ResponseEntity<List<Subgrupo>> findAll1() {
 			
 			List<Subgrupo> listSubgrupos = subgrupoService.findAll();
 			return ResponseEntity.ok().body(listSubgrupos)	;
 		}
 		
+		@GetMapping("/subgrupos")
+		public String findAll(Model model) {
+			
+			List<Subgrupo> listSubgrupos = subgrupoService.findAll();
+		
+			model.addAttribute("subgrupos",listSubgrupos);
+			return "/subgrupo/listar";
+		}
 		
 		// Lista todos os grupos de um determinado subgrupo
 		@GetMapping("/subgrupos/grupos/{id}")

@@ -1,5 +1,7 @@
 package com.ceasa.dev.web;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,15 @@ public class StartNoProjeto {
 		model.addAttribute("message", "Olá seja bem vindo - Sistema DEVCEASA -  ambiente de testes");
 		
 		return "/testes/start";
+		
+	}
+	
+	@GetMapping("/")
+	public String start1(Model model) {
+		model.addAttribute("message", "Olá seja bem vindo - Sistema DEVCEASA              ");
+		model.addAttribute("data", new Date());
+		
+		return "home";
 		
 	}
 	
