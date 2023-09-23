@@ -48,9 +48,9 @@ public class GrupoService {
 		
 	}
 	
-	public Grupo findByNome(String nome) {
+	public List<Grupo> findByNome(String nome) {
 		
-		Grupo theQuery = grupoRepository.findByNome(nome);
+		List<Grupo> theQuery = grupoRepository.findByNome(nome);
 		return theQuery;
 	}
 	
@@ -70,6 +70,11 @@ public class GrupoService {
 			grupoRepository.deleteById(id);
 			
 			}
+
+	public boolean grupoTemSubgrupo(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 

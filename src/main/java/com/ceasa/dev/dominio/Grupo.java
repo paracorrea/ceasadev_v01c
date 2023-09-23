@@ -14,6 +14,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "grupos")
@@ -25,12 +27,13 @@ public class Grupo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 
-	@Column(name = "nome", nullable = false, length = 25)
+	@Column(name = "nome", length = 20)
+	@NotNull(message="Campo não pode ser nullo")
+	//@Size(min=5, message="Deve ter no mínimo 5 caracteres")
 	String nome;
 
 	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-	@OneToMany(mappedBy = "grupo", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+	@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL )
 
 	private List<Subgrupo> subgrupos = new ArrayList<>();
 
