@@ -37,7 +37,7 @@ public class SubgrupoController {
 			this.subgrupoService = subgrupoService;
 		}
 
-		@GetMapping("/subgrupos/{id}")
+		@GetMapping("/subgrupos/view/{id}")
 		public ResponseEntity<?> findById(@PathVariable Integer id) {
 			
 			Subgrupo obj = subgrupoService.findById(id);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ceasa.dev.dominio.Grupo;
 import com.ceasa.dev.service.GrupoService;
+import com.ceasa.dev.service.SubgrupoService;
 import com.ceasa.dev.web.validator.GrupoValidator;
 
 import jakarta.validation.Valid;
@@ -29,6 +31,9 @@ public class GrupoController {
 	
 	@Autowired
 	private GrupoService grupoService;
+	
+	@Autowired
+	private SubgrupoService subService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -53,15 +58,18 @@ public class GrupoController {
 	}
 	
 	@PostMapping("/grupos/salvar")
-	public String salvar(@Valid Grupo grupo, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Grupo grupo, BindingResult result, RedirectAttributes attr, Model model) {
 		
 		if (result.hasErrors()) {
 			return "/grupo/cadastro";
 		}
 		
 		grupoService.insert(grupo);
-		attr.addFlashAttribute("success", "Grupo cadastrado com sucesso");
-		return "redirect:/ceasadev/grupos/cadastrar"; // return from method "/cadastrar" linha 20
+		//attr.addFlashAttribute("success", "Grupo cadastrado com sucesso");
+		model.addAttribute("message", "Grupo cadastrado com sucesso");
+		return "/grupo/mensagem";
+		
+		//return "redirect:/ceasadev/grupos/cadastrar"; // return from method "/cadastrar" linha 20
 	}
 	
 	
@@ -98,13 +106,14 @@ public class GrupoController {
 	public String excluir(@PathVariable("id") Integer id, ModelMap model) {
 		
 		if (grupoService.grupoTemSubgrupo(id)) {
-			model.addAttribute("fail", "Grupo não removido. Possui Subgrupo(s) vinculado(s)");
+			model.addAttribute("message", "Grupo não removido. Possui Subgrupo(s) vinculado(s)");
 		} else {
 			grupoService.delete(id);
-			model.addAttribute("success", "Grupo excluido com sucesso");
+			model.addAttribute("message", "Grupo excluido com sucesso");
 		}
-				
-		return listar(model);
+			
+		return "/grupo/mensagem";
+		//return listar(model);
 	}
 	
 	

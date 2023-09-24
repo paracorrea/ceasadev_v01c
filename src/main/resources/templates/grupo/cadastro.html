@@ -65,7 +65,7 @@
 						<th>ID</th>
 						<th>Nome do Grupo</th>
 						<th>Editar/Excluir</th>
-					
+						
 
 					</tr>
 				</thead>
@@ -74,6 +74,7 @@
 				<tr th:each="g : ${grupos}">
 					<td th:text="${g.id}"></td>
 					<td th:text="${g.nome}"></td>
+					
 					<td colspan="2">
 					<a class="btn btn-primary" th:href="@{/ceasadev/grupos/editar/{id} (id=${g.id}) }" role="button">
 	                <span class="oi oi-brush" title="Editar" aria-hidden="true">Editar</span>
@@ -86,7 +87,14 @@
 	                 <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 	                 X</button>
 	                 -->
+	                </td>
+	                <td>
+	                	<a th:href="@{/ceasadev/subgrupos/view/{id} (id=${g.id})}" class="btn btn-success">Subgrupos</a> 
+	                </td>
 				</tr>
+				
+				
+				
 				</tbody>
 			</table>
 		</div>
