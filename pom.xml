@@ -48,12 +48,27 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			
+
 		</dependency>
-		
-<!--		<dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>open-iconic</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!--		<dependency>
 			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+		<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>-->
 		<dependency>

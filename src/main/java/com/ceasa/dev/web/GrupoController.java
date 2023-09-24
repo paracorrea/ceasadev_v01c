@@ -78,30 +78,30 @@ public class GrupoController {
 	
 	@GetMapping("/grupos/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
-		model.addAttribute("departamento", grupoService.findById(id));
-		return "/departamento/cadastro";
+		model.addAttribute("grupo", grupoService.findById(id));
+		return "/grupo/cadastro";
 	}
 	
 	@PostMapping("/grupos/editar")
 	public String editar(@Valid Grupo grupo, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "/grupo/cadastro";
 		}
 		
 		grupoService.update(grupo);
 		attr.addFlashAttribute("success", "Grupo editado com sucesso");
-		return "redirect:/grupo/cadastrar";
+		return "redirect:/ceasadev/grupos/cadastrar";
 	}
 	
 	@GetMapping("/grupos/excluir/{id}")
 	public String excluir(@PathVariable("id") Integer id, ModelMap model) {
 		
 		if (grupoService.grupoTemSubgrupo(id)) {
-			model.addAttribute("fail", "Departamento não removido. Possui cargo(s) vinculado(s)");
+			model.addAttribute("fail", "Grupo não removido. Possui Subgrupo(s) vinculado(s)");
 		} else {
 			grupoService.delete(id);
-			model.addAttribute("success", "Departamento excluido com sucesso");
+			model.addAttribute("success", "Grupo excluido com sucesso");
 		}
 				
 		return listar(model);
